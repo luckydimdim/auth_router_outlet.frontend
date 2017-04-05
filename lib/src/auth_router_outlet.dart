@@ -4,7 +4,6 @@ import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 
 import 'package:auth/auth_service.dart';
-import 'package:auth/auth_component.dart';
 
 @Directive(
     selector: 'router-outlet'
@@ -23,13 +22,13 @@ class AuthRouterOutlet extends RouterOutlet {
   }
 
   bool _canActivate(String url) {
-    return url == AuthComponent.route.path || _authenticationService.isAuth();
+    return url == _authenticationService.authPath || _authenticationService.isAuth();
   }
 
   @override
   Future<dynamic> activate(ComponentInstruction nextInstruction) {
     if (!_canActivate(nextInstruction.urlPath)) {
-      var path = AuthComponent.route.path + '?url=${nextInstruction.urlPath}';
+      var path = _authenticationService.authPath + '?url=${nextInstruction.urlPath}';
       _pr.navigateByUrl(path);
     }
 
