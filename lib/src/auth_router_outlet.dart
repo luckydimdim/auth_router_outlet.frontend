@@ -22,7 +22,7 @@ class AuthRouterOutlet extends RouterOutlet {
   }
 
   bool _canActivate(String url) {
-    return url == _authenticationService.authPath || _authenticationService.isAuth();
+    return url == _authenticationService.authPath || _authenticationService.isAuth() ||  url == _authenticationService.activationPath;
   }
 
   @override
